@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios'
 import { connect } from 'react-redux'
-import {  Link, useHistory }from 'react-router-dom';
+import {  Link, Redirect }from 'react-router-dom';
 
 
 
@@ -11,21 +11,20 @@ class AdminLogement extends React.Component {
     this.state = {    
       list:  {},
       redirect:null,  
-      //recupere le isfavoriteLog de Apps
-      isFavoriteLog: this.props.isFavoriteLog      
+      
     }
-    //this.AddLogement = this.AddLogement.bind(this);
-    this.editLogement = this.editLogement.bind(this);
+    
     this.deleteLogement = this.deleteLogement.bind(this);
   } 
 
-  editLogement(id){
-    const  log = this.props.logements;
-    //this.setState({redirect: "AddLogement/${id}"});
-    //this.props.history.push("AddLogement/${id}");
-    <Link to={"/AddLogement/" + log.id}/>
-    return <Redirect to ={'AddLogement/'+id}/> 
-}
+//   editLogement(id){
+//     //const  log = this.props.logements;
+//     //this.setState({redirect: "AddLogement/${id}"});
+//     //this.props.history.push("AddLogement/${id}");
+//     //<Link to={"/AddLogement/" + log.id}/>
+//     //return <Redirect to ={'AddLogement/'+id}/> 
+//     this.props.history.push(`/AddLogement/${id}`);
+// }
 
 deleteLogement(id) {
 	//event.preventDefault();
@@ -80,7 +79,8 @@ deleteLogement(id) {
               height:30,
               width:30
            }}> 
-            <button style={{marginLeft: "-60px"}} onClick={ () => this.editLogement(log.id)} className="btn btn-info">Update </button>
+           <Link to={"/UpdateLogements/"+log.id}><button style={{marginLeft: "-60px"}}  className="btn btn-info">Update </button></Link>
+ 
             <button style={{marginLeft: "-150px"}} onClick={ () => this.deleteLogement(log.id)} className="btn btn-danger">Delete </button>        
             </div>
             

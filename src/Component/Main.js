@@ -11,6 +11,7 @@ import {
   import ListLogements from './ListLogements.js';
   import App from '../App';
   import AddLogement from './AddLogement';
+  import UpdateLogements from './UpdateLogements';
   import Accueil from './Accueil';
   import SignUp from './User/SignUp';
   import Login from './User/Login';
@@ -27,6 +28,7 @@ import {
 
           <Route  path="/DetailCardLogement/:id" component={DetailCardLogement}/> 
           <Route  path="/AddLogement/:id" component={AddLogement}/> 
+          <Route  path="/UpdateLogements/:id" component={UpdateLogements}/> 
          
        <Route  path="/Accueil">
             <Accueil />
@@ -37,9 +39,9 @@ import {
         <Route path="/App">
           < App  />
         </Route>
-        <Route path="/AddLogement">
+        {/* <Route path="/AddLogement">
            < AddLogement  />
-        </Route>
+        </Route> */}
         <Route path="/SignUp">
            < SignUp  />
         </Route>

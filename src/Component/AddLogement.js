@@ -97,14 +97,6 @@ class AddLogement extends React.Component {
       }
 
 
-        
-
-       editEmployee(id){
-        this.props.history.push(`/add-employee/${id}`);
-      }
-
-
-
     // componentDidMount() {
     //     axios.get(`https://mamaison.arenaplaza.site/api/Room/GetRoomList`)
     //       .then(res => {
