@@ -1,2 +1,2 @@
 # mamaison
-projet temporaire, creation du pont entre local et distant
+deuxieme tentative creation du pont entre local et distant
