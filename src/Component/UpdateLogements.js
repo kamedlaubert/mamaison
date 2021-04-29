@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import {Link}from 'react-router-dom';
+//import {Link}from 'react-router-dom';
 
 class UpdateLogements extends React.Component {
     constructor(props) {
@@ -8,13 +8,10 @@ class UpdateLogements extends React.Component {
 
         this.state = {
             list:{},
-            redirect:null,
             file: null,
-            fileArray: []
+            fileArray: [],
         }
-        // this.changeFirstNameHandler = this.changeFirstNameHandler.bind(this);
-        // this.changeLastNameHandler = this.changeLastNameHandler.bind(this);
-        // this.updateEmployee = this.updateEmployee.bind(this);
+ this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     // addRoom(room) {
@@ -33,41 +30,19 @@ class UpdateLogements extends React.Component {
 
 
 
-    // componentDidMount() {
-    //     const { match:{params}} = this.props;
-    //     let id = params.id;
-    //     //let id = this.props.match.params.id;
-         
-    //     axios.get("https://mamaison.arenaplaza.site/api/Room/GetRoomDetail/"+id)
-    //       .then(res => {
-    //         const listlogement = res.data;
-    //         console.log(this.props)
-    //         this.setState({ list: listlogement });
-    //        } )     
-    //     }
-        
-    componentDidMount(){
+    componentDidMount() {
         const { match:{params}} = this.props;
         let id = params.id;
         //let id = this.props.match.params.id;
+         
         axios.get("https://mamaison.arenaplaza.site/api/Room/GetRoomDetail/"+id)
-          .then( (res) =>{
-            let listlogement = res.data;
-            this.setState({list: listlogement});
-        });
-    }
-
-    // componentDidMount(){
-    //     const { match:{params}} = this.props;
-    //      let id = params.id;
-    //     axios.put("https://mamaison.arenaplaza.site/api/Room/"+id).then( (res) =>{
-    //        console.log(res.data);
-    //        let listlogement = res.data;
-    //        this.setState({list:listlogement});
-    //     });
-
-    // }
-
+          .then(res => {
+            const listlogement = res.data;
+            console.log(this.props)
+            this.setState({ list: listlogement });
+           } )     
+        }
+        
     // UpdateLogements = (e) => {
     //     e.preventDefault();
     //     let list = {roomName: this.state.name, bedroomNumber: this.state.name,
@@ -101,7 +76,7 @@ class UpdateLogements extends React.Component {
               templist["roomStateName"]=res.data.url
               this.setState({list:templist});
               console.log(this.state.list)
-              //this.updateLogement(this.state.list)
+              this.updateRoom(this.state.list)
               //on envoi l'image dans addroom
               //this.addRoom(templist)
   
@@ -110,13 +85,23 @@ class UpdateLogements extends React.Component {
               alert("serveur indisponible")
               console.log(erreur);
           });
-          
-            
+          event.preventDefault()           
+        }
+    
+        updateRoom(){
+            const { match:{params}} = this.props;
+            let id = params.id;
+            //let id = this.props.match.params.id;
+            axios.get(`https://mamaison.arenaplaza.site/api/Room/UpdatedRoomModel/`+id)
+            .then(res => {
+                console.log(res)
+                console.log(res.data);            
+              }).catch(erreur => {
+                console.log(erreur);
+              })
         }
 
-
-    
-    handleChange=(event) =>{
+ handleChange=(event) =>{
         //console.log(this.state.list);
         
 
@@ -145,31 +130,6 @@ class UpdateLogements extends React.Component {
       }
     }
     
-
-
-
-    handleChange= (event) => {
-        this.setState({roomName: event.target.value});
-    }
-
-    handleChange= (event) => {
-        this.setState({bedroomNumber: event.target.value});
-    }
-    handleChange= (event) => {
-        this.setState({showerNumber: event.target.value});
-    }
-    handleChange= (event) => {
-        this.setState({livingRoomNumber: event.target.value});
-    }
-    handleChange= (event) => {
-        this.setState({roomStateName: event.target.value});
-    }
-
-    cancel(){
-        <Link to={"/ListLogements/"}/>
-         
-    }
-
     render() {
         console.log(this.state.list);
         return (
@@ -207,9 +167,12 @@ class UpdateLogements extends React.Component {
             <label>
               Nombre de douche:
               <select value={this.state.list["showerNumber"]} name='showerNumber' onChange={this.handleChange}>
+                 <option>O</option>
                  <option>1</option>
+                 <option>2</option>
                  <option>3</option>
-                 <option>8</option>
+                 <option>4</option>
+                 <option>5</option>
               </select>
               
             </label><div></div>
@@ -217,8 +180,11 @@ class UpdateLogements extends React.Component {
                <label>
               Nombre de cuisine:
               <select value={this.state.list["cookedNumber"]} name='cookedNumber' onChange={this.handleChange}>
+                 <option>O</option>
                  <option>1</option>
+                 <option>2</option>
                  <option>3</option>
+                 <option>4</option>
                  <option>5</option>
               </select>
               
@@ -227,8 +193,11 @@ class UpdateLogements extends React.Component {
                <label>
               Nombre de salon:
               <select value={this.state.list["livingRoomNumber"]} name='livingRoomNumber' onChange={this.handleChange}>
+                 <option>O</option>
                  <option>1</option>
+                 <option>2</option>
                  <option>3</option>
+                 <option>4</option>
                  <option>5</option>
               </select>
               
@@ -238,7 +207,7 @@ class UpdateLogements extends React.Component {
               Loyer:
               <select value={this.state.list["rentCost"]} name= 'rentCost' onChange={this.handleChange}>
                  <option>5000</option>
-                 <option>10000</option>
+                 <option>100000</option>
                  <option>12000</option>
               </select>
               

@@ -1,7 +1,7 @@
 import React from 'react';
-import axios from 'axios'
+//import axios from 'axios'
 import { connect } from 'react-redux'
-import {  Link, Redirect }from 'react-router-dom';
+import {  Link }from 'react-router-dom';
 
 
 
@@ -9,49 +9,37 @@ class AdminLogement extends React.Component {
   constructor(props) {
     super(props);
     this.state = {    
-      list:  {},
-      redirect:null,  
-      
+      list:  [{}],   
     }
-    
-    this.deleteLogement = this.deleteLogement.bind(this);
+   
   } 
-
-//   editLogement(id){
-//     //const  log = this.props.logements;
-//     //this.setState({redirect: "AddLogement/${id}"});
-//     //this.props.history.push("AddLogement/${id}");
-//     //<Link to={"/AddLogement/" + log.id}/>
-//     //return <Redirect to ={'AddLogement/'+id}/> 
-//     this.props.history.push(`/AddLogement/${id}`);
-// }
-
-deleteLogement(id) {
-	//event.preventDefault();
-   axios.delete("https://mamaison.arenaplaza.site/api/Room/"+id)
-	.then(res => {
-        this.setState({list: this.state.list.filter(list => list.id !== id)});
-        const list = res.data;
-      console.log(list)          
-      })
-      
-      
-}
-
 
 //   handlePageChange(pageNumber) {
 //     console.log(`active page is ${pageNumber}`);
 //     this.setState({activePage: pageNumber});
 //   }
- 
- handleFavoritelog(log){
-   console.log(this.props)
-        this.setState({
-          isFavoriteLog: !this.state.isFavoriteLog
-        });
-        const action = { type: "TOGGLE_FAVORITE", value: log };
-        this.props.dispatch(action);
-      }
+handledelete  = (e,id)=>{
+  e.preventDefault()
+  let config= {headers:{"Access-Control-Allow-Origin":"*"}} //gerer l erreur du serveur
+  let locationTemp = this.state.list
+  let locationProv =[{}]
+
+
+  locationProv = locationTemp.filter( (item) => item.id !== id)
+
+ // locationTemp.splice(index, 1)
+   console.log(locationProv)
+   this.setState({list:locationProv});
+
+}
+// deleteLogement(id) {
+// 	//event.preventDefault();
+//   let listTemp = this.state.list
+//    axios.delete("https://mamaison.arenaplaza.site/api/Room/"+id)
+// 	.then(res => {
+//         this.setState({list: this.state.list.filter(list => list.id !== id)});     
+//       })     
+// }
 
   render() {
        const  log = this.props.logements
@@ -67,11 +55,11 @@ deleteLogement(id) {
            </Link>
         
         <div>
-          <li>appartement: {log.bedroomNumber}</li>,
-          <li>studio: {log.showerNumber}</li>,
-          <li>chambres: {log.cookedNumber}</li>,
-          <li>salons: {log.rentCost}</li>,
-          <li>cuisines: {log.livingRoomNumber}</li>,
+          <p>appartement: {log.bedroomNumber}</p>
+          <p>studio: {log.showerNumber}</p>
+          <p>chambres: {log.cookedNumber}</p>
+          <p>salons: {log.rentCost}</p>
+          <p>cuisines: {log.livingRoomNumber}</p>
           <div class="Image_zone" style={{
               position: 'relative',
               float:'right',
@@ -81,7 +69,7 @@ deleteLogement(id) {
            }}> 
            <Link to={"/UpdateLogements/"+log.id}><button style={{marginLeft: "-60px"}}  className="btn btn-info">Update </button></Link>
  
-            <button style={{marginLeft: "-150px"}} onClick={ () => this.deleteLogement(log.id)} className="btn btn-danger">Delete </button>        
+            <button style={{marginLeft: "-150px"}} onClick = { (e) => this.handledelete (e,log.id)} className="btn btn-danger">Delete </button>        
             </div>
             
         </div>

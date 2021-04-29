@@ -2,7 +2,7 @@ import React from 'react';
 import AdminLogement from './AdminLogement'
 //import Pagination from "react-js-pagination";
 //import {  Link }from 'react-router-dom';
-import { connect } from 'react-redux'
+//import { connect } from 'react-redux'
 
 import axios from 'axios'
   
@@ -24,12 +24,7 @@ class ListLogements extends React.Component {
 //         this.setState({list: this.state.list.filter(list => list.id !== id)});
 //       })
 //     }
-
     
-    editLogement(id){
-        this.props.history.push(`AddLogement/${id}`);
-    }  
-   
   componentDidMount() {
     axios.get(`https://mamaison.arenaplaza.site/api/Room/GetRoomList`)
       .then(res => {
@@ -40,12 +35,7 @@ class ListLogements extends React.Component {
         this.setState({ list: listlogement });
       })
   }
-
-
-  AddLogement(){
-        this.props.history.push('AddLogement/_add');
-    }
-      
+    
     render() {  
 
       //console.log(this.props)
