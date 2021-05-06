@@ -47,11 +47,11 @@ class Logements extends React.Component {
            </Link>
         
         <div>
-          <li>appartement: {log.bedroomNumber}</li>,
-          <li>studio: {log.showerNumber}</li>,
-          <li>chambres: {log.cookedNumber}</li>,
-          <li>salons: {log.rentCost}</li>,
-          <li>cuisines: {log.livingRoomNumber}</li>,
+          <p>appartement: {log.bedroomNumber}</p>
+          <p>studio: {log.showerNumber}</p>
+          <p>chambres: {log.cookedNumber}</p>
+          <p>salons: {log.rentCost}</p>
+          <p>cuisines: {log.livingRoomNumber}</p>
            
            <div class="Image_zone" onClick={()=>this.handleFavoritelog(log)}> 
             <img src={this.props.favoritesLog.findIndex(item=>item.id===log.id)!==-1 ? "ic_favorite.jpg":"ic_favorite_border.jpg" } alt = '' style={{

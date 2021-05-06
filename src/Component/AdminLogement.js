@@ -1,5 +1,5 @@
 import React from 'react';
-//import axios from 'axios'
+import axios from 'axios'
 import { connect } from 'react-redux'
 import {  Link }from 'react-router-dom';
 
@@ -9,37 +9,40 @@ class AdminLogement extends React.Component {
   constructor(props) {
     super(props);
     this.state = {    
-      list:  [{}],   
+      list:  [],   
     }
-   
+    this.handledelete = this.handledelete.bind(this);
   } 
 
 //   handlePageChange(pageNumber) {
 //     console.log(`active page is ${pageNumber}`);
 //     this.setState({activePage: pageNumber});
 //   }
-handledelete  = (e,id)=>{
-  e.preventDefault()
-  let config= {headers:{"Access-Control-Allow-Origin":"*"}} //gerer l erreur du serveur
-  let locationTemp = this.state.list
-  let locationProv =[{}]
+// handledelete  = (event,id)=>{
+//   event.preventDefault()
+//   let config= {headers:{"Access-Control-Allow-Origin":"*"}} //gerer l erreur du serveur
+//   let locationTemp = this.state.list
+//   let locationProv =[{}]
 
 
-  locationProv = locationTemp.filter( (item) => item.id !== id)
+//   locationProv = locationTemp.filter( (item) => item.id !== id)
 
- // locationTemp.splice(index, 1)
-   console.log(locationProv)
-   this.setState({list:locationProv});
+//  // locationTemp.splice(index, 1)
+//    console.log(locationProv)
+//    this.setState({list:locationProv});
 
-}
-// deleteLogement(id) {
-// 	//event.preventDefault();
-//   let listTemp = this.state.list
-//    axios.delete("https://mamaison.arenaplaza.site/api/Room/"+id)
-// 	.then(res => {
-//         this.setState({list: this.state.list.filter(list => list.id !== id)});     
-//       })     
 // }
+handledelete(id,list) {
+   
+	//event.preventDefault();
+   axios.delete("https://mamaison.arenaplaza.site/api/Room/"+id)
+	.then(res => {
+        this.setState({list: this.state.list.filter(item => list.id !== id)});     
+      }) 
+      
+      
+    
+}
 
   render() {
        const  log = this.props.logements
@@ -69,7 +72,7 @@ handledelete  = (e,id)=>{
            }}> 
            <Link to={"/UpdateLogements/"+log.id}><button style={{marginLeft: "-60px"}}  className="btn btn-info">Update </button></Link>
  
-            <button style={{marginLeft: "-150px"}} onClick = { (e) => this.handledelete (e,log.id)} className="btn btn-danger">Delete </button>        
+            <button style={{marginLeft: "-150px"}} onClick = { () => this.handledelete (log.id)} className="btn btn-danger">Delete </button>        
             </div>
             
         </div>
